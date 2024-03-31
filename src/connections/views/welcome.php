@@ -1,25 +1,3 @@
-<?php
-session_start();
-
-// Check if the user is already logged in
-if (isset($_SESSION['name']) && isset($_SESSION['email'])) {
-    // User is already logged in, redirect to the game page
-    header('Location: game.php');
-    exit();
-}
-
-// Process the form submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name']) && isset($_POST['email'])) {
-    // Sanitize and validate input as necessary
-    $_SESSION['name'] = trim($_POST['name']);
-    $_SESSION['email'] = trim($_POST['email']);
-
-    // Redirect to the game page
-    header('Location: game.php');
-    exit();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name']) && isset($_PO
 <body>
     <div class="container">
         <h1>Welcome to the Connections Game</h1>
-        <form action="index.php?command=startGame" method="POST">
+        <form action="?command=login" method="post">
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
