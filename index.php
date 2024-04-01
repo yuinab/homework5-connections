@@ -1,4 +1,9 @@
 <?php
+// Sources used: 
+//https://cs4640.cs.virginia.edu/activities/php-trivia2.html
+//https://cs4640.cs.virginia.edu/activities/php-trivia1.html
+//link:
+//https://cs4640.cs.virginia.edu/ncd6fc/hw5/
 session_start();
 if (isset($_SESSION['name']) && isset($_SESSION['email'])) {
     header('Location: src/connections/views/game.php');
