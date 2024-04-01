@@ -3,5 +3,5 @@ session_start();
 session_destroy();
 
 // Redirect to the index
-header('Location: welcome.php');
+header('Location: ../../../index.php');
 exit();

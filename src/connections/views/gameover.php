@@ -3,7 +3,7 @@ session_start();
 
 // Redirect to the welcome page if no session
 if (!isset($_SESSION['name']) || !isset($_SESSION['email'])) {
-    header('Location: welcome.php');
+    header('Location: ../../../index.php');
     exit();
 }
 
