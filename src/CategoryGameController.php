@@ -6,21 +6,25 @@ class CategoryGameController {
     private $db;
     private $errorMessage = "";
 
+
     /**
      * Constructor
      */
     public function __construct($input) {
         session_start();
         $this->db = new Database();
+        $this->input = $input;
+        $jsonData = file_get_contents("\\connections\\data\\connections.json");
+        $this->data = json_decode($jsonData, true); 
         $this->$_POST = $input;
-        $this->loadData(); 
+
     }
 
 public function run(){
         // Get the command
         $command = "example";
-        if (isset($this->$_POST["command"]))
-            $command = $this->$_POST["command"];
+        if (isset($this->$input["command"]))
+            $command = $this->$input["command"];
         
         if (!isset($_SESSION["name"]) && $command != "login")
         $command = "welcome";
@@ -47,14 +51,10 @@ switch ($command) {
 
 }
 
-public function loadData (){
-    $this->data = json_decode(
-        file_get_contents("/data/connections.json"), true);
-}
 public function login() {
-    if (isset($_POST["name"]) && isset($_POST["email"]) &&
-        !empty($_POST["name"]) && !empty($_POST["email"])) {
-        $_SESSION["name"] = $_POST["name"];
+    if (isset($_POST["fullname"]) && isset($_POST["email"]) &&
+        !empty($_POST["fullname"]) && !empty($_POST["email"])) {
+        $_SESSION["name"] = $_POST["fullname"];
         $_SESSION["email"] = $_POST["email"];
         $_SESSION["score"] = 0;
         header("Location: ?command=startGame");
@@ -63,6 +63,7 @@ public function login() {
     $this->errorMessage = "Error logging in - Name and email is required";
     $this->showWelcome();
 }
+
 public function showWelcome() {
     $message = "";
     if (!empty($this->errorMessage)) {
@@ -72,9 +73,9 @@ public function showWelcome() {
 }
 
 public function showGame($message = "") {
-    $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "";
-    $email = isset($_SESSION["email"]) ? $_SESSION["email"] : "";
-    $score = isset($_SESSION["score"]) ? $_SESSION["score"] : "";
+    $name = $_SESSION["name"];
+    $email = $_SESSION["email"];
+    $score = $_SESSION["score"];
     include("../views/game.php");
 }
 
@@ -82,6 +83,4 @@ public function exitGame() {
     session_destroy();
     session_start();
 }
-
-
 }

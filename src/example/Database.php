@@ -2,7 +2,7 @@
 
 class Database {
     private $dbConnector;
-
+    /*
     public function __construct(){
         $host = Config::$db["host"];
         $user = Config::$db["user"];
@@ -20,4 +20,5 @@ class Database {
         }
         return pg_fetch_all($res);
     }
+    */
 }

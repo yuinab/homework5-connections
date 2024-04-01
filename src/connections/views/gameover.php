@@ -3,11 +3,11 @@ session_start();
 
 // Redirect to the welcome page if no session
 if (!isset($_SESSION['name']) || !isset($_SESSION['email'])) {
-    header('Location: index.php?command=welcome');
+    header('Location: welcome.php');
     exit();
 }
 
-// replace this with the actual game data
+// Retrieve categories and words data from session
 $categories = $_SESSION['categories'] ?? [];
 $guesses = $_SESSION['guesses'] ?? 0;
 
@@ -28,18 +28,19 @@ $guesses = $_SESSION['guesses'] ?? 0;
         <p>Well done, <?php echo htmlspecialchars($_SESSION['name']); ?>! Here's how you did:</p>
 
         <div class="results">
-            <h2>Categories and Words</h2>
-            <?php foreach ($categories as $category => $words): ?>
-                <p><strong><?php echo htmlspecialchars($category); ?>:</strong> <?php echo htmlspecialchars(implode(', ', $words)); ?></p>
-            <?php endforeach; ?>
-            
-            <p>Total guesses: <?php echo $guesses; ?></p>
-        </div>
+    <h2>Categories and Words</h2>
+    <?php foreach ($categories as $category => $words): ?>
+        <p><strong><?php echo htmlspecialchars($category); ?>:</strong> <?php echo htmlspecialchars(implode(', ', $words)); ?></p>
+    <?php endforeach; ?>
+    
+    <p>Total guesses: <?php echo $guesses; ?></p>
+</div>
 
         <div class="actions">
-            <a href="../index.php?command=startGame">Play Again</a> |
-            <a href="../index.php?command=exitGame">Exit</a>
+            <a href="gameAgain.php">Play Again</a> |
+            <a href="exit.php">Exit</a>
         </div>
     </div>
 </body>
 </html>
+

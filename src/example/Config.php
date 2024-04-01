@@ -1,5 +1,7 @@
 <?php
 class Config {
+
+    /*
     public static $db = [
         'host' => "db",
         'port' => "5432",
@@ -7,6 +9,7 @@ class Config {
         'user' => "localuser",
         'password' => "cs4640LocalUser!"
     ];
+    */
 }
     // Note that these are for the local Docker container
 
